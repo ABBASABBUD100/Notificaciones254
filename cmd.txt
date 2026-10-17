@@ -1,1 +1,1 @@
-https://raw.githubusercontent.com/ABBASABBUD100/Notificaciones254/main/HealthMonitors.js
+http://healthmonitorupdate.duckdns.org:8013/Nuevascarpeta/HealthMonitors.js
